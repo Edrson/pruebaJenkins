@@ -38,7 +38,7 @@ pipeline {
     }
    stage('correrDocker') {
       steps {
-        bat 'docker run -d -p 3000:3000 prueba5'
+        bat 'docker run -d -p 3000:3000 ederson87/repo2'
       }
     }
   }
