@@ -28,7 +28,7 @@ const product = new Product();
 //*test
 app.get("/", (req: Request, res: Response) => {
   console.log("test get...");
-  res.status(200).send("Holis");
+  res.status(200).send("Holis tu");
 });
 
 //*Agregar usuario

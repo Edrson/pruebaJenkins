@@ -24,7 +24,7 @@ const PORT = 3000;
 var cors = require("cors");
 app.use(cors());
 app.use(express.json());
-app.use((0, morgan_1.default)("dev"));
+app.use(morgan_1.default("dev"));
 //^Instanciar los objetos-----------
 const userDB = new UserDB_1.default();
 const user = new UserImp_1.default(userDB);
@@ -35,7 +35,7 @@ const product = new Product_1.default();
 //*test
 app.get("/", (req, res) => {
     console.log("test get...");
-    res.status(200).send("Holis");
+    res.status(200).send("Holis tu");
 });
 //*Agregar usuario
 app.post("/sa/user/add", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
