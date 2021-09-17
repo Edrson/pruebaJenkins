@@ -12,9 +12,7 @@ pipeline {
     }
      
 
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('ederson87-dockerhub')
-  }   
+ 
     stage('Build') {
       steps {
         bat 'npm install'
