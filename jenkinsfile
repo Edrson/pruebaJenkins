@@ -18,18 +18,15 @@ pipeline {
       }
     }  
     
-            
-    stage('Test') {
-      steps {
-        bat 'npm run test'
-      }
-    }
-    
     stage('crearDockerImage') {
       steps {
         bat 'docker build -t prueba5 .'
       }
     }
-
+   stage('correrDocker') {
+      steps {
+        bat 'docker run -d -p 3000:3000 prueba5'
+      }
+    }
   }
 }
