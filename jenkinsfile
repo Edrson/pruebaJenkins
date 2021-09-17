@@ -28,13 +28,9 @@ agent any
       }
     }
 
-    stage('Deploy our image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
+	  stage('Push') {
+      steps {
+        bat 'docker push ederson87/repo2:v3'
       }
     }
 
