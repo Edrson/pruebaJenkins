@@ -27,7 +27,7 @@ pipeline {
     
     stage('crearDockerImage') {
       steps {
-        bat 'docker build -t prueba4 .'
+        bat 'docker build -t prueba5 .'
       }
     }
 
