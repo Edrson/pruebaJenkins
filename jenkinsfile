@@ -11,6 +11,10 @@ pipeline {
       }
     }
      
+
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('ederson87-dockerhub')
+  }   
     stage('Build') {
       steps {
         bat 'npm install'
@@ -20,7 +24,18 @@ pipeline {
     
     stage('crearDockerImage') {
       steps {
-        bat 'docker build -t prueba5 .'
+        bat 'docker build -t ederson87/repo2:v3 .'
+      }
+    }
+
+    stage('Login') {
+      steps {
+        bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('Push') {
+      steps {
+        bat 'docker push ederson87/repo2:v3'
       }
     }
    stage('correrDocker') {
@@ -28,5 +43,10 @@ pipeline {
         bat 'docker run -d -p 3000:3000 prueba5'
       }
     }
+  post {
+    always {
+      bat 'docker logout'
+    }
+  }
   }
 }
