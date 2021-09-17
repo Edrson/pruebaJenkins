@@ -17,7 +17,12 @@ pipeline {
         
       }
     }  
-    
+    stage('clean Container') {
+      steps {
+        bat 'docker stop $(docker ps -a -q)'
+        bat 'docker rm $(docker ps -a -q)'
+      }
+    }   
     stage('crearDockerImage') {
       steps {
         bat 'docker build -t prueba5 .'
