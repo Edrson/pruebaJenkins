@@ -1,8 +1,12 @@
 pipeline {
-  agent any
-    
- 
-    
+  
+environment {
+  registry = "ederson87/repo2"
+  registryCredential = 'ederson87-dockerhub'
+  dockerImage = ''
+}
+
+agent any  
   stages {
         
     stage('Git') {
@@ -11,8 +15,6 @@ pipeline {
       }
     }
      
-
- 
     stage('Build') {
       steps {
         bat 'npm install'
@@ -26,16 +28,16 @@ pipeline {
       }
     }
 
-    stage('Login') {
-      steps {
-        bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+    stage('Deploy our image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
       }
     }
-    stage('Push') {
-      steps {
-        bat 'docker push ederson87/repo2:v3'
-      }
-    }
+
    stage('correrDocker') {
       steps {
         bat 'docker run -d -p 3000:3000 ederson87/repo2'
